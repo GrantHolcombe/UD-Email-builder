@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 
 class Content extends Component {
+
   render() {
+
+    const data = this.props.contentData
+    console.log(data);
     return (
-      <h1> Content blocks here </h1>
+<div>
+      {data.map(function(item, i){
+      <div className="content-block">
+        <label>Img Src:
+          <input type="text" name="header_data" placeholder="Enter the shipping paramater" />
+        </label>
+      </div>
+    })}
+</div>
+
     );
   }
 }

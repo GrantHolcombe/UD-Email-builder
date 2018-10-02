@@ -9,11 +9,13 @@ class App extends Component {
   super(props, context);
 
   this.handleChange = this.handleChange.bind(this);
+  this.addContentBlock = this.addContentBlock.bind(this);
 
   this.state = {
     header_data: '',
     content_data: [
       {
+        content_id: 0,
         content_img_src: '',
         content_link: '',
         content_utm: '',
@@ -33,12 +35,27 @@ handleChange(event) {
   }
 }
 
+addContentBlock() {
+  const blankBlock = {
+    content_id: this.state.content_data.length,
+    content_img_src: '',
+    content_link: '',
+    content_utm: '',
+    content_alt: ''
+  }
+  const addBlock = [...this.state.content_data, blankBlock]
+  this.setState({
+    content_data: addBlock
+  });
+}
+
   render() {
     return (
       <div className="wrapper">
         <Header onChange={this.handleChange} />
         <p>{this.state.header_data}</p>
-        <Content />
+        <Content onChange={this.handleChange} contentData={this.state.content_data}/>
+        <button onClick={this.addContentBlock}>Dont do it</button>
         <Footer />
       </div>
     );
