@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import update from 'immutability-helper';
 import Header from './components/header.js';
 import Content from './components/content.js';
 import Footer from './components/footer.js';
@@ -9,6 +10,7 @@ class App extends Component {
   super(props, context);
 
   this.handleChange = this.handleChange.bind(this);
+  this.blockChange = this.blockChange.bind(this);
   this.addContentBlock = this.addContentBlock.bind(this);
 
   this.state = {
@@ -26,13 +28,19 @@ class App extends Component {
   };
 }
 
-handleChange(event) {
-  // get the name value of the changing form field
-  const targetName = event.target.name
-  // find the state value that matches the field name, and update it
-  if(targetName === 'header_data'){
-    this.setState({ header_data: event.target.value})
-  }
+handleChange(e) {
+  let change = {}
+  change[e.target.name] = e.target.value
+  this.setState(change)
+}
+
+blockChange(e) {
+  let change = {}
+  // let newBlock = {
+  //
+  // }
+  change[e.target.name] = e.target.value
+  console.log(change);
 }
 
 addContentBlock() {
@@ -52,9 +60,9 @@ addContentBlock() {
   render() {
     return (
       <div className="wrapper">
-        <Header onChange={this.handleChange} />
+        <Header onChange={this.handleChange} data={this.state.header_data}/>
         <p>{this.state.header_data}</p>
-        <Content onChange={this.handleChange} contentData={this.state.content_data}/>
+        <Content onChange={this.blockChange} contentData={this.state.content_data}/>
         <button onClick={this.addContentBlock}>Dont do it</button>
         <Footer />
       </div>
