@@ -34,13 +34,20 @@ handleChange(e) {
   this.setState(change)
 }
 
-blockChange(e) {
-  let change = {}
-  // let newBlock = {
-  //
-  // }
-  change[e.target.name] = e.target.value
-  console.log(change);
+blockChange(event, id) {
+  // copy array from state
+  let newArr = [...this.state.content_data]
+  // copy specific object from array in state
+  let change = Object.assign({}, this.state.content_data[id])
+  // loop through coppied object and change updated property
+  for(var property in change) {
+    if(property === event.target.name)
+    change[event.target.name] = event.target.value
+  }
+  // cut out the outdated object and inject the updated one from the copied array
+  newArr.splice(id, 1, change);
+  // rewrite the updated array to state
+  this.setState({ content_data: newArr });
 }
 
 addContentBlock() {
@@ -64,7 +71,7 @@ addContentBlock() {
         <p>{this.state.header_data}</p>
         <Content onChange={this.blockChange} contentData={this.state.content_data}/>
         <button onClick={this.addContentBlock}>Dont do it</button>
-        <Footer />
+        <Footer onChange={this.handleChange} data={this.state.footer_data} />
       </div>
     );
   }
