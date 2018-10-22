@@ -20,6 +20,7 @@ class Content extends Component {
         <label>Alt Text:
           <input onChange={(e) => {this.props.onChange(e, item.content_id)}} value={this.props.contentData[item.content_id].content_alt} type="text" name={Object.keys(item)[4]} placeholder={Object.keys(item)[4]} />
         </label>
+        <button onClick={() => this.props.removeBlock(item.content_id)}>Remove Block</button>
       </div>
     );
     console.log(contentBlocks);
