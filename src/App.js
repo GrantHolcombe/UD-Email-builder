@@ -16,7 +16,13 @@ class App extends Component {
 
   this.state = {
     header_data: '',
-    content_data: [],
+    content_data: [{
+      content_id: 0,
+      content_img_src: '',
+      content_link: '',
+      content_utm: '',
+      content_alt: ''
+    }],
     footer_data: ''
   };
 }
@@ -65,8 +71,8 @@ removeContentBlock(id) {
   // splice finds the index of the desired content block and removes it from the arry copy
   newArr.splice(id, 1);
   // this crazy loop is because we need to re-assign ID's if we remove a content block that is not at the end
-  newArr.forEach(function(e, i){
-    e.content_id = i
+  newArr.forEach(function(element, index){
+    element.content_id = index
   })
   // apply array copy to state
   this.setState({
@@ -79,6 +85,7 @@ removeContentBlock(id) {
       <div className="wrapper">
 
         <Header onChange={this.handleChange} data={this.state.header_data}/>
+
         <p>{this.state.header_data}</p>
 
         <Content onChange={this.blockChange} removeBlock={this.removeContentBlock} contentData={this.state.content_data}/>
