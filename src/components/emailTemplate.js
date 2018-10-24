@@ -23,6 +23,9 @@ class Template extends Component {
         linkArr.splice(linkArr.length, 0, "&" + item.content_utm);
         renderLink = linkArr.join('')
       }
+      else {
+        renderLink = item.content_link + '?' + item.content_utm
+      }
 
         return (
         '<tr>' +
@@ -44,10 +47,10 @@ class Template extends Component {
           head.blockOne +
           this.props.data.header_data +
           head.blockTwo +
-          contentBlocks +
+          contentBlocks.join('') +
           footer.blockOne +
           this.props.data.footer_data +
-          footer.blockTwo 
+          footer.blockTwo
         }</p>
       </div>
     );
