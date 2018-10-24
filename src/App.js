@@ -3,6 +3,7 @@ import Header from './components/header.js';
 import Content from './components/content.js';
 import Footer from './components/footer.js';
 import Template from './components/emailTemplate.js';
+import TextVersion from './components/emailTextVersion.js';
 import './App.css';
 
 class App extends Component {
@@ -15,6 +16,8 @@ class App extends Component {
   this.removeContentBlock = this.removeContentBlock.bind(this);
 
   this.state = {
+    subject_data: '',
+    preheader_data: '',
     header_data: '',
     content_data: [{
       content_id: 0,
@@ -94,7 +97,15 @@ removeContentBlock(id) {
 
         <Footer onChange={this.handleChange} data={this.state.footer_data} />
 
+        <h1>Email HTML</h1>
         <Template data={this.state} />
+
+        <h1>Email Text Version</h1>
+        <TextVersion data={this.state} />
+
+        <h1>Email Live Preview</h1>
+        <i>coming soon</i>
+
       </div>
     );
   }

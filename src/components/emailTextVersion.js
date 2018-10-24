@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import head from './headTemplate.json';
 import footer from './footerTemplate.json';
 
-class Template extends Component {
+class TextVersion extends Component {
   render() {
 
     const data = this.props.data.content_data
+
     const contentBlocks = data.map((item, i) => {
       const linkArr = item.content_link.split('');
       let renderLink = ''
@@ -25,33 +26,17 @@ class Template extends Component {
       }
 
         return (
-        '<tr>' +
-         '<td width="100%" align="center" valign="top" class="photo">' +
-          '<div align="right" style="font-size: 0; line-height: 1;">' +
-           '<a href="' + renderLink + '" target="_blank" style="text-decoration:none;font-size:14px;font-family:arial;">' +
-            '<img src="' + item.content_img_src + '" width="100%" alt="' + item.content_alt + '" border="0" style="display:block;color:#ffffff;"/>' +
-           '</a>' +
-          '</div>' +
-         '</td>' +
-        '</tr>'
+        <p>loop content blocks for text version</p>
         )
       }
     );
 
     return (
       <div>
-        <p>{
-          head.blockOne +
-          this.props.data.header_data +
-          head.blockTwo +
-          contentBlocks +
-          footer.blockOne +
-          this.props.data.footer_data +
-          footer.blockTwo 
-        }</p>
+        <p>preheader here {contentBlocks}</p>
       </div>
     );
   }
 }
 
-export default Template;
+export default TextVersion;
