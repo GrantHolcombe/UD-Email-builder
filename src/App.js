@@ -4,6 +4,7 @@ import Content from './components/content.js';
 import Footer from './components/footer.js';
 import Template from './components/emailTemplate.js';
 import TextVersion from './components/emailTextVersion.js';
+import LiveVersion from './components/emailLiveVersion.js';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
   this.blockChange = this.blockChange.bind(this);
   this.addContentBlock = this.addContentBlock.bind(this);
   this.removeContentBlock = this.removeContentBlock.bind(this);
+  this.changeView = this.changeView.bind(this);
 
   this.state = {
     subject_data: '',
@@ -26,7 +28,8 @@ class App extends Component {
       content_utm: '',
       content_alt: ''
     }],
-    footer_data: ''
+    footer_data: '',
+    previewViewIndex: 0
   };
 }
 
@@ -83,28 +86,51 @@ removeContentBlock(id) {
   });
 }
 
+changeView(viewId) {
+  this.setState({previewViewIndex: viewId});
+}
+
+
   render() {
+    let previewView
+    switch (this.state.previewViewIndex) {
+      case 0:
+        previewView = <Template data={this.state} />
+        break;
+      case 1:
+        previewView = <TextVersion data={this.state} />
+        break;
+      case 2:
+        previewView = <LiveVersion data={this.state} />
+        break;
+      default:
+      previewView = <Template data={this.state} />
+    }
+
     return (
-      <div className="wrapper">
+      <div className="container-fluid">
 
-        <Header onChange={this.handleChange} data={this.state.header_data}/>
+        <div className="row">
 
-        <p>{this.state.header_data}</p>
+          <div className="col-sm-6">
+            <Header onChange={this.handleChange} data={this.state.header_data}/>
 
-        <Content onChange={this.blockChange} removeBlock={this.removeContentBlock} contentData={this.state.content_data}/>
+            <Content onChange={this.blockChange} removeBlock={this.removeContentBlock} contentData={this.state.content_data}/>
 
-        <button onClick={this.addContentBlock}>Add Content Block</button>
+            <button onClick={this.addContentBlock}>Add Content Block</button>
 
-        <Footer onChange={this.handleChange} data={this.state.footer_data} />
+            <Footer onChange={this.handleChange} data={this.state.footer_data} />
+          </div>
 
-        <h1>Email HTML</h1>
-        <Template data={this.state} />
+          <div className="col-sm-6">
+            <button onClick={() => this.changeView(0)}>HTML View</button>
+            <button onClick={() => this.changeView(1)}>Text View</button>
+            <button onClick={() => this.changeView(2)}>Live View</button>
+            {previewView}
 
-        <h1>Email Text Version</h1>
-        <TextVersion data={this.state} />
+          </div>
 
-        <h1>Email Live Preview</h1>
-        <i>coming soon</i>
+        </div>
 
       </div>
     );
