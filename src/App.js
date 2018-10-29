@@ -44,10 +44,20 @@ blockChange(event, id) {
   let newArr = [...this.state.content_data]
   // copy specific object from array in state
   let change = Object.assign({}, this.state.content_data[id])
+  // convert UTM string to lowercase for use in URL
+  let val = event.target.value.toLowerCase();
   // loop through coppied object and change updated property
   for(var property in change) {
     if(property === event.target.name)
-    change[event.target.name] = event.target.value
+    console.log(val);
+    if(event.target.name === 'content_utm'){
+      const replace = val.replace(' ', '_');
+      change[event.target.name] = replace
+    }
+    else{
+        change[event.target.name] = val
+    }
+
   }
   // cut out the outdated object and inject the updated one from the copied array
   newArr.splice(id, 1, change);

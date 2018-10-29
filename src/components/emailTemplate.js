@@ -9,22 +9,23 @@ class Template extends Component {
     const contentBlocks = data.map((item, i) => {
       const linkArr = item.content_link.split('');
       let renderLink = ''
+      let utmTemplate = 'utm_medium=email_brand&utm_source=sfmc&utm_campaign=%%emailname_%%&utm_content=' + item.content_utm
       if(linkArr.indexOf('#') !== -1){
         if(linkArr.indexOf('?') !== -1){
-          linkArr.splice(linkArr.indexOf('#'), 0, "&" + item.content_utm);
+          linkArr.splice(linkArr.indexOf('#'), 0, "&" + utmTemplate);
           renderLink = linkArr.join('')
         }
         else{
-          linkArr.splice(linkArr.indexOf('#'), 0, "?" + item.content_utm);
+          linkArr.splice(linkArr.indexOf('#'), 0, "?" + utmTemplate);
           renderLink = linkArr.join('')
         }
       }
       else if (linkArr.indexOf('?') !== -1) {
-        linkArr.splice(linkArr.length, 0, "&" + item.content_utm);
+        linkArr.splice(linkArr.length, 0, "&" + utmTemplate);
         renderLink = linkArr.join('')
       }
       else {
-        renderLink = item.content_link + '?' + item.content_utm
+        renderLink = item.content_link + '?' + utmTemplate
       }
 
         return (
