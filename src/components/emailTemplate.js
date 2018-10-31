@@ -43,7 +43,7 @@ class Template extends Component {
     );
 
     return (
-      <div>
+      <div style={{maxHeight: 750, border: 'solid', wordBreak: 'break-word', overflowY: 'scroll', padding: 5, margin: 5}}>
         <p>{
           head.blockOne +
           this.props.data.header_data +

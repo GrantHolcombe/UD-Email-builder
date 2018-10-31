@@ -16,8 +16,10 @@ class App extends Component {
   this.addContentBlock = this.addContentBlock.bind(this);
   this.removeContentBlock = this.removeContentBlock.bind(this);
   this.changeView = this.changeView.bind(this);
+  this.saveBuild = this.saveBuild.bind(this);
 
   this.state = {
+    campaign_name: '',
     subject_data: '',
     preheader_data: '',
     header_data: '',
@@ -31,6 +33,10 @@ class App extends Component {
     footer_data: '',
     previewViewIndex: 0
   };
+}
+
+saveBuild(){
+  console.log(this.state);
 }
 
 handleChange(e) {
@@ -121,15 +127,29 @@ changeView(viewId) {
       <div className="container-fluid">
 
         <div className="row">
+          <div className="col-sm-12 text-center">
+            <h1>Urban Decay Email Builder</h1>
+          </div>
 
           <div className="col-sm-6">
-            <Header onChange={this.handleChange} data={this.state.header_data}/>
+
+            <div className="form-group">
+              <Header onChange={this.handleChange} data={this.state}/>
+            </div>
 
             <Content onChange={this.blockChange} removeBlock={this.removeContentBlock} contentData={this.state.content_data}/>
 
-            <button onClick={this.addContentBlock}>Add Content Block</button>
+            <div className="form-group">
+              <Footer onChange={this.handleChange} data={this.state.footer_data} />
+            </div>
 
-            <Footer onChange={this.handleChange} data={this.state.footer_data} />
+            <div className="row">
+              <div className="col-12">
+                <button className="btn btn-success float-left" onClick={this.addContentBlock}>Add Content Block</button>
+                <button className="btn btn-warning float-right" onClick={this.saveBuild}>Save Email Build</button>
+              </div>
+            </div>
+
           </div>
 
           <div className="col-sm-6">
