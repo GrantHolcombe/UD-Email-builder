@@ -7,6 +7,7 @@ class Content extends Component {
     const data = this.props.contentData
     const contentBlocks = data.map((item, i) =>
 
+
       <div key={item.content_id} className="content-block">
         <div className="row">
           <div className="col-6 text-center">
