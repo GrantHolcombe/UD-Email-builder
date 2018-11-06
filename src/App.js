@@ -18,6 +18,7 @@ class App extends Component {
   this.changeView = this.changeView.bind(this);
   this.saveBuild = this.saveBuild.bind(this);
 
+
   this.state = {
     campaign_name: '',
     subject_data: '',
