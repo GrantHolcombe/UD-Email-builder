@@ -31,7 +31,7 @@ class TextVersion extends Component {
 
         return (
           <div>
-            <p>
+            <p style={{whiteSpace: 'pre-line'}}>
               {item.content_alt}
               <br />
               {renderLink}

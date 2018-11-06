@@ -10,6 +10,8 @@ class Template extends Component {
       const linkArr = item.content_link.split('');
       let renderLink = ''
       let utmTemplate = 'utm_medium=email_brand&utm_source=sfmc&utm_campaign=%%emailname_%%&utm_content=' + item.content_utm
+      let altText = item.content_alt.replace('\n', ' ');
+      altText = altText.replace('\"', '\'');
       if(linkArr.indexOf('#') !== -1){
         if(linkArr.indexOf('?') !== -1){
           linkArr.splice(linkArr.indexOf('#'), 0, "&" + utmTemplate);
@@ -33,7 +35,7 @@ class Template extends Component {
          '<td width="100%" align="center" valign="top" class="photo">' +
           '<div align="right" style="font-size: 0; line-height: 1;">' +
            '<a href="' + renderLink + '" target="_blank" style="text-decoration:none;font-size:14px;font-family:arial;">' +
-            '<img src="' + item.content_img_src + '" width="100%" alt="' + item.content_alt + '" border="0" style="display:block;color:#ffffff;"/>' +
+            '<img src="' + item.content_img_src + '" width="100%" alt="' + altText + '" border="0" style="display:block;color:#ffffff;"/>' +
            '</a>' +
           '</div>' +
          '</td>' +

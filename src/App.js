@@ -61,7 +61,7 @@ blockChange(event, id) {
       change[event.target.name] = replace
     }
     else{
-        change[event.target.name] = val
+        change[event.target.name] = event.target.value
     }
 
   }
@@ -131,7 +131,7 @@ changeView(viewId) {
             <h1>Urban Decay Email Builder</h1>
           </div>
 
-          <div className="col-sm-6">
+          <div className="col-sm-6" >
 
             <div className="form-group">
               <Header onChange={this.handleChange} data={this.state}/>

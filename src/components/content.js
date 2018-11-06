@@ -36,7 +36,7 @@ class Content extends Component {
           </div>
           <div className="form-group">
             <label style={{minWidth: '100%'}}>Alt Text:
-              <input className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_alt} type="text" name={Object.keys(item)[4]} placeholder={Object.keys(item)[4]} />
+              <textarea rows="3" className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_alt} type="text" name={Object.keys(item)[4]} placeholder={Object.keys(item)[4]} />
             </label>
           </div>
         </div>
@@ -47,7 +47,7 @@ class Content extends Component {
 
     return (
 
-<div className="content-section">
+<div className="content-section"  style={{maxHeight: 450, wordBreak: 'break-word', overflow: 'hidden scroll'}}>
         {contentBlocks}
 </div>
 

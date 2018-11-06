@@ -45,7 +45,7 @@ class liveVersion extends Component {
     const previewHTML = head.blockOne + this.props.data.header_data + head.blockTwo + contentBlocks.join('') + footer.blockOne + this.props.data.footer_data + footer.blockTwo
 
     return (
-      <div style={{maxHeight: 750, border: 'solid', wordBreak: 'break-word', overflowY: 'scroll', padding: 5, margin: 5}}>
+      <div className="cool-divs-bro" style={{maxHeight: 900, border: 'solid', wordBreak: 'break-word', overflowY: 'scroll', padding: 5, margin: 5}}>
         <div dangerouslySetInnerHTML={{ __html: previewHTML }} />
       </div>
     );
