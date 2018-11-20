@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import Header from './components/header.js';
 import Content from './components/content.js';
 import Footer from './components/footer.js';
@@ -17,6 +18,7 @@ class App extends Component {
   this.removeContentBlock = this.removeContentBlock.bind(this);
   this.changeView = this.changeView.bind(this);
   this.saveBuild = this.saveBuild.bind(this);
+  this.loadBuild = this.loadBuild.bind(this);
 
 
   this.state = {
@@ -37,7 +39,19 @@ class App extends Component {
 }
 
 saveBuild(){
+  Axios.post('https://bt12aqzvfd.execute-api.us-west-1.amazonaws.com/Production/send-email-obj', this.state );
   console.log(this.state);
+}
+
+loadBuild(){
+  const loadName = prompt("enter a Campaign Name");
+  if(loadName != null) {
+    const newState = Axios.post('https://bt12aqzvfd.execute-api.us-west-1.amazonaws.com/Production/return-email-obj', '"' + loadName + '"' )
+      .then(response =>
+        this.setState(response.data)
+        // console.log(response.data)
+      );
+  }
 }
 
 handleChange(e) {
@@ -148,6 +162,7 @@ changeView(viewId) {
               <div className="col-12">
                 <button className="btn btn-success float-left" onClick={this.addContentBlock}>Add Content Block</button>
                 <button className="btn btn-warning float-right" onClick={this.saveBuild}>Save Email Build</button>
+                <button className="btn btn-primary float-right" onClick={this.loadBuild}>Load Email Build</button>
               </div>
             </div>
 

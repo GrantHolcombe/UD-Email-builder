@@ -21,22 +21,22 @@ class Content extends Component {
         <div className="col-lg-8 offset-lg-2">
           <div className="form-group">
             <label style={{minWidth: '100%'}}>Img Src:
-              <input className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_img_src} type="text" name={Object.keys(item)[1]} placeholder={Object.keys(item)[1]} />
+              <input className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_img_src} type="text" name="content_img_src" placeholder="content img src" />
             </label>
           </div>
           <div className="form-group">
             <label style={{minWidth: '100%'}}>Link HREF:
-              <input className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_link} type="text" name={Object.keys(item)[2]} placeholder={Object.keys(item)[2]} />
+              <input className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_link} type="text" name="content_link" placeholder="content link" />
             </label>
           </div>
           <div className="form-group">
             <label style={{minWidth: '100%'}}>Content UTM:
-              <input className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_utm} type="text" name={Object.keys(item)[3]} placeholder={Object.keys(item)[3]} />
+              <input className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_utm} type="text" name="content_utm" placeholder="content UTM" />
             </label>
           </div>
           <div className="form-group">
             <label style={{minWidth: '100%'}}>Alt Text:
-              <textarea rows="3" className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_alt} type="text" name={Object.keys(item)[4]} placeholder={Object.keys(item)[4]} />
+              <textarea rows="3" className="form-control input-lg" onChange={(e) => {this.props.onChange(e, item.content_id)}} value={item.content_alt} type="text" name="content_alt" placeholder="content alt text" />
             </label>
           </div>
         </div>
