@@ -142,10 +142,12 @@ changeView(viewId) {
       <div className="container-fluid">
 
         <div className="row">
-          <div className="col-sm-12 text-center">
+          <div className="col text-center py-3">
             <h1>Urban Decay Email Builder</h1>
           </div>
+        </div>
 
+        <div className="row">
           <div className="col-sm-6" >
 
             <div className="form-group">
