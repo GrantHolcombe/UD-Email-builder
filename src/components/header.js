@@ -5,22 +5,24 @@ class Header extends Component {
     return (
       <div>
         <div className="row">
-          <div className="col-lg-4 offset-lg-4 form-group">
+          <div className="col-lg-4 form-group justify-content-center d-flex">
             <label>Campaign Name:
               <input className="form-control" type="text" onChange={this.props.onChange} value={this.props.data.campaign_name} name="campaign_name" placeholder="Enter the Campaign Name" />
             </label>
           </div>
-          <div className="col-lg-4 offset-lg-2 form-group">
+          <div className="col-lg-4 form-group justify-content-center d-flex">
             <label>Subject line:
               <input className="form-control" type="text" onChange={this.props.onChange} value={this.props.data.subject_data} name="subject_data" placeholder="Enter the Subject" />
             </label>
           </div>
-          <div className="col-lg-4 offset-lg-2 form-group">
+          <div className="col-lg-4 form-group justify-content-center d-flex">
             <label>Preheader:
               <input className="form-control" type="text" onChange={this.props.onChange} value={this.props.data.preheader_data} name="preheader_data" placeholder="Enter the Preheader" />
             </label>
           </div>
-          <div className="col-lg-4 offset-lg-4 form-group">
+        </div>
+        <div className="row">
+          <div className="col-lg-12 form-group">
             <p style={{margin: 0}}>Shipping option:</p>
             <div className="radio">
               <label>
