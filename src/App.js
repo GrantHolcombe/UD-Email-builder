@@ -22,8 +22,8 @@ class App extends Component {
 
 
   this.state = {
-    campaign_name: '',
-    subject_data: '',
+    campaign_name: null,
+    subject_data: null,
     preheader_data: '',
     header_data: '',
     content_data: [{
@@ -39,17 +39,48 @@ class App extends Component {
 }
 
 saveBuild(){
+  // TODO scrub blank data fields from the request (DynamoDB doesn't accept empty strings), HACK this is working now, but save needs to repopulate blanks
+  const dynamoFrendlyState = {
+    content_data: []
+  }
+
+  for(var key in this.state){
+    if(this.state[key] !== "" && typeof this.state[key] !== 'object') {
+      dynamoFrendlyState[key] = this.state[key]
+    }
+  }
+
+  var arrCopy = [...this.state.content_data];
+  arrCopy.forEach(function(item){
+    var cleanItem = {}
+    Object.keys(item).forEach(key => {
+      //console.log(key);          // the name of the current key.
+      //console.log(item[key]);   // the value of the current key.
+        if(item[key] !== ""){
+          cleanItem[key] = item[key];
+        }
+      });
+      dynamoFrendlyState.content_data.push(cleanItem);
+    });
+
+  // send the current state to the API
   Axios.post('https://bt12aqzvfd.execute-api.us-west-1.amazonaws.com/Production/send-email-obj', this.state );
-  console.log(this.state);
+
+  // TODO dynamo cleaned state is working for save, need to build loader to repopulate empty fields so things dont break
+  // Axios.post('https://bt12aqzvfd.execute-api.us-west-1.amazonaws.com/Production/send-email-obj', dynamoFrendlyState );
+  // console.log(dynamoFrendlyState);
 }
 
 loadBuild(){
+  // ask user for campaign_name to load
   const loadName = prompt("enter a Campaign Name");
   if(loadName != null) {
+    // make http request to API with the campaign_name
     const newState = Axios.post('https://bt12aqzvfd.execute-api.us-west-1.amazonaws.com/Production/return-email-obj', '"' + loadName + '"' )
       .then(response =>
+        // set the state to the API response
+        // var mergedObj = Object.assign{this.state, response.data};
         this.setState(response.data)
-        // console.log(response.data)
       );
   }
 }
@@ -70,7 +101,6 @@ blockChange(event, id) {
   // loop through coppied object and change updated property
   for(var property in change) {
     if(property === event.target.name)
-    console.log(val);
     if(event.target.name === 'content_utm'){
       const replace = val.replace(' ', '_');
       change[event.target.name] = replace
