@@ -22,8 +22,8 @@ class App extends Component {
 
 
   this.state = {
-    campaign_name: null,
-    subject_data: null,
+    campaign_name: '',
+    subject_data: '',
     preheader_data: '',
     header_data: '',
     content_data: [{
